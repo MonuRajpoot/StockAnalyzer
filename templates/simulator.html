@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Performance Simulator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='/styles.css') }}" />
+</head>
+<body data-page="simulator">
+  <video autoplay muted loop id="bg-video">
+    <source src="{{ url_for('static', filename='video/background6.mp4') }}" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+
+  <nav>
+    <a href="{{ url_for('index') }}">Home</a>
+    <a href="{{ url_for('about_page') }}">About Website</a>
+    <div class="dropdown">
+      <span class="dropdown-btn">Insights ▾</span>
+      <div class="dropdown-content">
+        <a href="{{ url_for('price_history_page') }}">Price History</a>
+        <a href="{{ url_for('signals_page') }}">Backtested Signals</a>
+        <a href="{{ url_for('simulator_page') }}">Performance Simulator</a>
+        <a href="{{ url_for('volatility_page') }}">Volatility Dashboard</a>
+        <a href="{{ url_for('bought_page') }}">If You Bought on X Day</a>
+        <a href="{{ url_for('strength_page') }}">Stock Strength Score</a>
+        <a href="{{ url_for('weekday_returns_page') }}">Avg Weekday Returns</a>
+        <a href="{{ url_for('year_growth_page') }}">Year-wise Growth</a>
+      </div>
+    </div>
+    <a href="{{ url_for('contact_page') }}">Contact</a>
+    <a href="#">Learn</a>
+  </nav>
+
+  <div class="main-content">
+    <h1>Investment Performance Simulator</h1>
+    <div class="search-box">
+      <form id="simulator-form">
+        <select id="symbol-select" required>
+          <option value="">Select Stock Symbol</option>
+          {% for sym in symbols %}
+            <option value="{{ sym }}">{{ sym }}</option>
+          {% endfor %}
+        </select>
+        <input type="date" id="sim-start-date" required />
+        <input type="number" id="sim-amount" placeholder="Amount (INR)" required />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <div id="sim-result" style="margin-top: 20px; font-size: 1.2em;"></div>
+  </div>
+
+  <script src="{{ url_for('static', filename='/script.js') }}"></script>
+</body>
+</html>

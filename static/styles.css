@@ -1,0 +1,233 @@
+/* Reset and font setup */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* 🎥 Video Background Styling */
+#bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100vw;
+  min-height: 100vw;
+  object-fit: cover;
+  z-index: -1; /* Keep it behind everything */
+}
+
+/* 🌐 Navigation - Updated for right alignment and icons */
+nav {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: flex-end; /* Changed from center to flex-end for right alignment */
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.2rem 2rem; /* Added more right padding for edge spacing */
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+nav a:hover {
+  color: #2d9bdb;
+}
+
+/* Icon styling */
+nav i {
+  font-size: 1.2rem; /* Slightly larger icons */
+}
+
+.icon-text {
+  margin-left: 6px;
+  font-size: 0.9rem;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+  position: absolute;
+  pointer-events: none;
+}
+
+nav a:hover .icon-text, 
+.dropdown:hover .icon-text {
+  opacity: 1;
+  transform: translateX(0);
+  position: relative;
+  pointer-events: auto;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-btn {
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-btn i:last-child {
+  margin-left: 5px;
+  font-size: 0.8rem;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #222;
+  min-width: 200px;
+  z-index: 20;
+  right: 0; /* Align dropdown to the right */
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+  transition: background-color 0.2s;
+}
+
+.dropdown-content a:hover {
+  background-color: #333;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 📊 Main Content */
+.main-content {
+  height: 120vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  padding: 20px;
+  z-index: 2;
+  animation: fadeInUp 1.5s ease-in-out;
+  position: relative;
+}
+
+.main-content h1 {
+  font-size: 58px;
+  font-weight: 600;
+  animation: fadeInUp 1.5s ease-in-out;
+}
+
+/* ✅ Fixed: Only one <p> styling block */
+.main-content p {
+  color: white;
+  font-size: 20px;
+  margin: 20px 0 30px;
+  animation: fadeInUp 2s ease-in-out;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+}
+
+/* 🔍 Search Box */
+.search-box {
+  display: flex;
+  gap: 15px;
+  animation: fadeInUp 2.5s ease-in-out;
+}
+
+.search-box input,
+.search-box button {
+  padding: 12px 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 20px;
+}
+
+.search-box input {
+  width: 200px;
+}
+
+.search-box button {
+  background-color:#65a156;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.search-box button:hover {
+  background-color: #1B7BB8;
+}
+
+/* 🔽 Stock symbol select box styling */
+.search-box select {
+  padding: 12px 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #fff;
+  color: #333;
+  width: 200px;
+}
+
+/* ✨ Animations */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  nav {
+    justify-content: center; /* Center align on mobile */
+  }
+  
+  .search-box {
+    flex-direction: column;
+  }
+
+  .search-box input,
+  .search-box select {
+    width: 100%;
+  }
+  
+  /* Show icon text on mobile for better accessibility */
+  .icon-text {
+    opacity: 1;
+    transform: translateX(0);
+    position: relative;
+    pointer-events: auto;
+    display: none; /* Hide by default on mobile to save space */
+  }
+}

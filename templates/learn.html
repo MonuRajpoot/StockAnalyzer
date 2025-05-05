@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>📘 Learn Stock Analysis</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #f1f3f5;
+      transition: background 0.3s, color 0.3s;
+    }
+    .dark-mode {
+      background-color: #1c1c1c;
+      color: #e0e0e0;
+    }
+    .card {
+      border: none;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+    }
+    .card-header {
+      cursor: pointer;
+      background-color: transparent;
+    }
+    .example {
+      font-style: italic;
+      color: #6c757d;
+    }
+    #searchBox {
+      max-width: 400px;
+    }
+    .bi {
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+    .dark-mode .card {
+      background-color: #2c2c2c;
+    }
+    .dark-mode .accordion-button {
+      background-color: #343a40;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container py-4">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>📘 Learn Stock Analysis</h1>
+    <div>
+      <input type="text" id="searchBox" class="form-control form-control-sm" placeholder="Search topic...">
+    </div>
+    <button class="btn btn-sm btn-dark" onclick="toggleDarkMode()">🌓 Dark Mode</button>
+  </div>
+
+  <div class="accordion" id="learnAccordion">
+
+    <!-- Template for items -->
+    <div class="accordion-item" data-title="technical indicator visualizer">
+      <h2 class="accordion-header">
+        <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapse1">
+          <i class="bi bi-graph-up"></i> 1. Technical Indicator Visualizer
+        </button>
+      </h2>
+      <div id="collapse1" class="accordion-collapse collapse">
+        <div class="accordion-body">
+          <p><strong>SMA:</strong> Simple average of past closing prices.</p>
+          <p><strong>EMA:</strong> Like SMA but recent prices matter more.</p>
+          <p><strong>MACD:</strong> Fast EMA - Slow EMA.</p>
+          <p><strong>Signal Line:</strong> EMA of MACD.</p>
+          <p class="example">📊 Example: Axis Bank’s 10-day SMA = ₹900 if last 10-day prices average ₹900.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item" data-title="backtested signal highlights">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapse2">
+          <i class="bi bi-lightning-charge-fill"></i> 2. Backtested Signal Highlights
+        </button>
+      </h2>
+      <div id="collapse2" class="accordion-collapse collapse">
+        <div class="accordion-body">
+          <p><strong>MACD crossover:</strong> Buy = MACD > Signal. Sell = MACD < Signal.</p>
+          <p><strong>RSI:</strong> Above 70 = overbought. Below 30 = oversold.</p>
+          <p class="example">📈 Example: ICICI Bank RSI falls below 30 → buy signal?</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item" data-title="performance simulator">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapse3">
+          <i class="bi bi-cash-coin"></i> 3. Performance Simulator
+        </button>
+      </h2>
+      <div id="collapse3" class="accordion-collapse collapse">
+        <div class="accordion-body">
+          <p>Choose stock, date, and amount to simulate investment returns.</p>
+          <p class="example">💰 Example: ₹10,000 in HDFC Bank in 2020 → ₹18,000 today.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item" data-title="heatmap of indicator states">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapse4">
+          <i class="bi bi-grid-3x3-gap-fill"></i> 4. Heatmap of Indicator States
+        </button>
+      </h2>
+      <div id="collapse4" class="accordion-collapse collapse">
+        <div class="accordion-body">
+          <p>View MACD signal status (bullish/bearish) for all stocks.</p>
+          <p class="example">🟢 Axis Bank bullish = green; 🔴 Wipro bearish = red.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item" data-title="volatility dashboard">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapse5">
+          <i class="bi bi-activity"></i> 5. Volatility Dashboard
+        </button>
+      </h2>
+      <div id="collapse5" class="accordion-collapse collapse">
+        <div class="accordion-body">
+          <p>Find out how risky or stable each stock is using standard deviation.</p>
+          <p class="example">📉 Infosys = low volatility; Bajaj Finance = high.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item" data-title="if you bought on x day tool">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapse6">
+          <i class="bi bi-calendar-check-fill"></i> 6. "If You Bought on X Day" Tool
+        </button>
+      </h2>
+      <div id="collapse6" class="accordion-collapse collapse">
+        <div class="accordion-body">
+          <p>Pick a past date → see what your investment is worth now.</p>
+          <p class="example">📆 Example: ₹5,000 in ITC on Mar 1, 2022 → ₹7,500 now.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item" data-title="stock strength scoring">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapse7">
+          <i class="bi bi-star-fill"></i> 7. Stock Strength Scoring
+        </button>
+      </h2>
+      <div id="collapse7" class="accordion-collapse collapse">
+        <div class="accordion-body">
+          <p>Score based on trend, MACD, volume, etc.</p>
+          <p class="example">🏆 TCS → +2 (trend), +1 (MACD), +1 (volume) = 4/5 score.</p>
+        </div>
+      </div>
+    </div>
+    <a href="{{ url_for('index') }}" style="margin-top: 30px; display: inline-block; padding: 10px 20px; background-color: #2d9bdb; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">🔙 Back to Home</a>
+  </div>
+</div>
+
+<!-- Bootstrap Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Interactivity Script -->
+<script>
+  function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+  }
+
+  document.getElementById('searchBox').addEventListener('input', function () {
+    const search = this.value.toLowerCase();
+    document.querySelectorAll('.accordion-item').forEach(item => {
+      const title = item.getAttribute('data-title');
+      item.style.display = title.includes(search) ? '' : 'none';
+    });
+  });
+</script>
+
+</body>
+</html>

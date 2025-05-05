@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+    <script defer src="https://cdn.plot.ly/plotly-2.35.2.min.js" 
+            onerror="console.error('Failed to load Plotly.js from CDN'); document.body.insertAdjacentHTML('beforeend', '<div style=\"color: red; margin: 20px;\">Failed to load Plotly.js. Please check your network or browser settings.</div>');"></script>
+    <style>
+        .card {
+            background: linear-gradient(135deg, #c77dff, #7b2cbf);
+            border-radius: 20px;
+            padding: 10px;
+            margin: 10px auto;
+            width: 50%;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .chart-buttons {
+            margin: 20px auto;
+            width: 50%;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .chart-buttons button {
+            background: linear-gradient(135deg, #28a745, #1e7e34);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .chart-buttons button:hover {
+            transform: scale(1.05);
+        }
+
+        .chart {
+            width: 80%;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #dc3545, #a71d2a);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.6s; }
+        .card:nth-child(5) { animation-delay: 0.9s; }
+        .card:nth-child(6) { animation-delay: 1.2s; }
+    </style>
+</head>
+<body data-page="result">
+    <video autoplay muted loop id="bg-video">
+        <source src="{{ url_for('static', filename='video/background.mp4') }}" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+
+    <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('about_page') }}">About Website</a>
+        <div class="dropdown">
+            <span class="dropdown-btn">Insights ▾</span>
+            <div class="dropdown-content">
+                <a href="{{ url_for('price_history_page') }}">Price History</a>
+                <a href="{{ url_for('signals_page') }}">Backtested Signals</a>
+                <a href="{{ url_for('simulator_page') }}">Performance Simulator</a>
+                <a href="{{ url_for('volatility_page') }}">Volatility Dashboard</a>
+                <a href="{{ url_for('bought_page') }}">If You Bought on X Day</a>
+                <a href="{{ url_for('strength_page') }}">Stock Strength Score</a>
+                <a href="{{ url_for('weekday_returns_page') }}">Avg Weekday Returns</a>
+                <a href="{{ url_for('year_growth_page') }}">Year-wise Growth</a>
+            </div>
+        </div>
+        <a href="{{ url_for('contact_page') }}">Contact</a>
+        <a href="#">Learn</a>
+    </nav>
+
+    <div class="main-content">
+        <h1 style="color: #ff9f1c;">Stock Analysis for: {{ stock_symbol }}</h1>
+
+        {% if error %}
+            <div class="card">
+                <p>{{ error }}</p>
+            </div>
+        {% else %}
+            <div class="card">
+                Average Close Price<br>
+                {{ avg_close | round(2) }} INR
+            </div>
+            <div class="card">
+                Highest Price<br>
+                {{ highest_price | round(2) }} INR
+            </div>
+            <div class="card">
+                Lowest Price<br>
+                {{ lowest_price | round(2) }} INR
+            </div>
+            <div class="card">
+                Average Return<br>
+                {{ avg_return | round(2) }}%
+            </div>
+            <div class="card">
+                <p>Stock Data for: {{ start_date }} to {{ end_date }}</p>
+            </div>
+            <div class="chart-buttons">
+                <button id="price-history-btn">Price History</button>
+                <button id="volume-traded-btn">Volume Traded</button>
+            </div>
+            <div id="resultChart" class="chart"></div>
+        {% endif %}
+        <a href="{{ url_for('index') }}" class="back-button">Back to Home</a>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

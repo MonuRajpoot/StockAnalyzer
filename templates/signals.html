@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Backtested Signals</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='/styles.css') }}" />
+  <script defer src="https://cdn.plot.ly/plotly-2.35.2.min.js" 
+          onerror="console.error('Failed to load Plotly.js from CDN'); document.body.insertAdjacentHTML('beforeend', '<div style=\"color: red; margin: 20px;\">Failed to load Plotly.js. Please check your network or browser settings.</div>');"></script>
+</head>
+<body data-page="signals">
+  <video autoplay muted loop id="bg-video">
+    <source src="{{ url_for('static', filename='video/background7.mp4') }}" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+
+  <nav>
+    <a href="{{ url_for('index') }}">Home</a>
+    <a href="{{ url_for('about_page') }}">About Website</a>
+    <div class="dropdown">
+      <span class="dropdown-btn">Insights ▾</span>
+      <div class="dropdown-content">
+        <a href="{{ url_for('price_history_page') }}">Price History</a>
+        <a href="{{ url_for('signals_page') }}">Backtested Signals</a>
+        <a href="{{ url_for('simulator_page') }}">Performance Simulator</a>
+        <a href="{{ url_for('volatility_page') }}">Volatility Dashboard</a>
+        <a href="{{ url_for('bought_page') }}">If You Bought on X Day</a>
+        <a href="{{ url_for('strength_page') }}">Stock Strength Score</a>
+        <a href="{{ url_for('weekday_returns_page') }}">Avg Weekday Returns</a>
+        <a href="{{ url_for('year_growth_page') }}">Year-wise Growth</a>
+      </div>
+    </div>
+    <a href="{{ url_for('contact_page') }}">Contact</a>
+    <a href="#">Learn</a>
+  </nav>
+
+  <div class="main-content">
+    <h1>Backtested Signals</h1>
+    <div class="search-box">
+      <form id="signals-form">
+        <select id="symbol-select" required>
+          <option value="">Select Stock Symbol</option>
+          {% for sym in symbols %}
+            <option value="{{ sym }}">{{ sym }}</option>
+          {% endfor %}
+        </select>
+        <input type="date" id="start-date" />
+        <input type="date" id="end-date" />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <div id="signalChart" style="max-height: 400px; margin-top: 20px;"></div>
+  </div>
+
+  <script src="{{ url_for('static', filename='/script.js') }}"></script>
+</body>
+</html>
